@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  usb-agent:
+    build: .
+    image: packetzapper/usb-agent
+    ports:
+      - 8000:8000
+    environment:
+      ES_USER: elastic
+      ES_PASS: ${ELASTIC_PASSWORD:-}
+      ES_HOST: http://elasticsearch:9200/
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    networks:
+      - airflow_default
+
+networks:
+  airflow_default:
+    external: true

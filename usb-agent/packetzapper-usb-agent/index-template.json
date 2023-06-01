@@ -1,0 +1,25 @@
+{
+  "template": {
+    "mappings": {
+      "dynamic": true,
+      "numeric_detection": true,
+      "date_detection": true,
+      "dynamic_date_formats": [
+        "strict_date_optional_time",
+        "yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"
+      ],
+      "_source": {
+        "enabled": true,
+        "includes": [],
+        "excludes": []
+      },
+      "_routing": {
+        "required": false
+      },
+      "dynamic_templates": []
+    }
+  },
+  "index_patterns": [
+    "packetzapper"
+  ]
+}

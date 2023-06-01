@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  jupyter:
+    build: .
+    image: packetzapper/jupyter
+    ports:
+      - 8888:8888
+    volumes:
+      - ./data:/home/jovyan/data
+      - ../airflow/dags:/home/jovyan/dags
+    environment:
+      JUPYTER_TOKEN: ${ELASTIC_PASSWORD:-}
+      ES_USER: elastic
+      ES_PASS: ${ELASTIC_PASSWORD:-}
+      ES_HOST: http://elasticsearch:9200/
+    restart: unless-stopped
+    networks:
+      - airflow_default
+
+networks:
+  airflow_default:
+    external: true
